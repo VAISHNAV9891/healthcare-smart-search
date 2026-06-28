@@ -4,7 +4,17 @@ const hospitalSchema = new mongoose.Schema({
   hospitalName: { type: String, required: true },
   specialty: { type: String, required: true },
   symptoms: [{ type: String }],
-  location: { type: String, required: true },
+  location: {
+        type: {
+            type: String, 
+            enum: ['Point'], 
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
   rating: { type: Number, required: true },
   reviewCount: { type: Number, default: 100 },
 });

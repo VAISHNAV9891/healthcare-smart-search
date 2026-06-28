@@ -1,12 +1,17 @@
+import dns from 'dns';
+dns.setServers(['8.8.8.8','8.8.4.4']);
 import express from 'express';
 import mongoose from 'mongoose';
 import { GoogleGenAI } from '@google/genai';
 import { searchRouter } from './routes/index.js';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import 'dotenv/config';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(cors());//Don't block any ip for now
 app.use(express.json());
 app.use(ExpressMongoSanitize());
 app.use('/api/healthcare', searchRouter);
